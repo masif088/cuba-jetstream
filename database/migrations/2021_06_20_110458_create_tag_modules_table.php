@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeamsTable extends Migration
+class CreateTagModulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,20 @@ class CreateTeamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('tag_modules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index();
-            $table->string('name');
-            $table->boolean('personal_team');
-            $table->unsignedBigInteger('college_id')->nullable();
+            $table->unsignedBigInteger('tag_id');
+            $table->unsignedBigInteger('module_id');
             $table->timestamps();
-            $table->foreign('college_id')
+            $table->foreign('tag_id')
                 ->references('id')
-                ->on('colleges')
+                ->on('tags')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
+
+            $table->foreign('module_id')
+                ->references('id')
+                ->on('modules')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
         });
@@ -35,6 +39,6 @@ class CreateTeamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('tag_modules');
     }
 }

@@ -22,7 +22,16 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->unsignedBigInteger('college_id')->nullable();
+            $table->integer('nim')->nullable();
+            $table->integer('role')->default(0);
             $table->timestamps();
+
+            $table->foreign('college_id')
+                ->references('id')
+                ->on('colleges')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
         });
     }
 

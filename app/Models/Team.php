@@ -18,7 +18,7 @@ class Team extends JetstreamTeam
      * @var array
      */
     protected $casts = [
-        'personal_team' => 'boolean',
+        'personal_team' => 'boolean'
     ];
 
     /**
@@ -29,6 +29,7 @@ class Team extends JetstreamTeam
     protected $fillable = [
         'name',
         'personal_team',
+        'college_id'
     ];
 
     /**
