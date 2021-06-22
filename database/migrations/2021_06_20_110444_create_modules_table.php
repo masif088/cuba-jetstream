@@ -18,7 +18,6 @@ class CreateModulesTable extends Migration
             $table->string('title');
             $table->unsignedBigInteger('learning_path_id');
             $table->integer('level');
-            $table->string('thumbnail-path')->nullable();
             $table->timestamps();
             $table->foreign('learning_path_id')
                 ->references('id')

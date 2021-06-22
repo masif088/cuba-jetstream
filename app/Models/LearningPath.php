@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $id
+ * @property integer $team_id
  * @property string $title
  * @property string $slug
- * @property string $study_program_id
  * @property string $privilege
+ * @property string $thumbnail_path
  * @property string $status
  * @property string $created_at
  * @property string $updated_at
+ * @property Team $team
  * @property Module[] $modules
  * @property UserOnLearningPath[] $userOnLearningPaths
  */
@@ -28,7 +30,15 @@ class LearningPath extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'slug', 'study_program_id', 'privilege', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['team_id', 'title', 'slug', 'privilege', 'thumbnail_path', 'status', 'created_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function team()
+    {
+        return $this->belongsTo('App\Models\Team');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -15,6 +15,7 @@ class CreateTheoriesTable extends Migration
     {
         Schema::create('theories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->unsignedBigInteger('module_id');
             $table->longText('content');
@@ -22,6 +23,11 @@ class CreateTheoriesTable extends Migration
             $table->foreign('module_id')
                 ->references('id')
                 ->on('modules')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
         });

@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $learning_path_id
  * @property string $title
  * @property int $level
- * @property string $thumbnail-path
  * @property string $created_at
  * @property string $updated_at
  * @property LearningPath $learningPath
@@ -31,7 +30,7 @@ class Module extends Model
     /**
      * @var array
      */
-    protected $fillable = ['learning_path_id', 'title', 'level', 'thumbnail-path', 'created_at', 'updated_at'];
+    protected $fillable = ['learning_path_id', 'title', 'level', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

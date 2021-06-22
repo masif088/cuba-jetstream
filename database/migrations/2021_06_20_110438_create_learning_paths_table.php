@@ -17,10 +17,17 @@ class CreateLearningPathsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->string('study_program_id');
+            $table->unsignedBigInteger('team_id');
             $table->string('privilege');
+            $table->string('thumbnail_path')->nullable();
             $table->string('status');
             $table->timestamps();
+            $table->foreign('team_id')
+                ->references('id')
+                ->on('teams')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
+
         });
     }
 

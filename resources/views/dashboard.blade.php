@@ -13,6 +13,6 @@
     </x-slot>
 
     <div>
-
+            
     </div>
 </x-app-layout>
