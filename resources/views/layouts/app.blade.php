@@ -152,10 +152,10 @@
                             </div>
                         </div>
                         <ul class="profile-dropdown onhover-show-div">
-                            <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>
-                            <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
-                            <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
-                            <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
+{{--                            <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>--}}
+{{--                            <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>--}}
+{{--                            <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>--}}
+{{--                            <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>--}}
                             <li>
 
                                 <form method="POST" action="{{ route('logout') }}">
@@ -271,6 +271,9 @@
 <script src="{{asset('js/typeahead-search/handlebars.js')}}"></script>
 <script src="{{asset('js/typeahead-search/typeahead-custom.js')}}"></script>
 <script src="{{asset('js/tooltip-init.js')}}"></script>
+
+<script src="{{asset('js/form-validation-custom.js')}}"></script>
+
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('js/script.js')}}"></script>
