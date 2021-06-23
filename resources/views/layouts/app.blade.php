@@ -16,7 +16,7 @@
         <title>{{ config('app.name', 'Laravel') - $title }}</title>
     @else
         <title>{{ config('app.name', 'Laravel') }}</title>
-    @endif
+@endif
 <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
           rel="stylesheet')}}">
@@ -36,7 +36,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/animate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/chartist.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/date-picker.css')}}">
-    <!-- Plugins css Ends-->
+{{--    <link rel="stylesheet" type="text/css" href="{{asset('css/summernote.min.css')}}">--}}
+<!-- Plugins css Ends-->
+    <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/summernote.css')}}">
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/bootstrap.css')}}">
     <!-- App css-->
@@ -73,72 +75,20 @@
                 </div>
             </form>
             <div class="header-logo-wrapper col-auto p-0">
-                <div class="logo-wrapper"><a href="index.html"><img class="img-fluid"
-                                                                    src="{{asset('images/logo/logo.png')}}" alt=""></a>
+                <div class="logo-wrapper"><a href="{{ route('dashboard') }}">
+                        <img class="img-fluid" src="{{asset('images/logo/logo.png')}}" alt="">
+                    </a>
                 </div>
-                <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle"
-                                               data-feather="align-center"></i></div>
+                <div class="toggle-sidebar">
+                    <i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
+                </div>
             </div>
             <div class="left-header col horizontal-wrapper ps-0">
                 <ul class="horizontal-menu">
-                    @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                        <div class="ml-3 relative">
-                            <x-jet-dropdown align="right" width="60">
-                                <x-slot name="trigger">
-                                <span class="inline-flex rounded-md">
-                                    <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
-                                        {{ Auth::user()->currentTeam->name }}
-
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                             viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                  d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                                                  clip-rule="evenodd"/>
-                                        </svg>
-                                    </button>
-                                </span>
-                                </x-slot>
-
-                                <x-slot name="content">
-                                    <div class="w-60">
-                                        <!-- Team Management -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
-                                            {{ __('Manage Team') }}
-                                        </div>
-
-                                        <!-- Team Settings -->
-                                        <x-jet-dropdown-link
-                                            href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                            {{ __('Team Settings') }}
-                                        </x-jet-dropdown-link>
-
-                                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                            <x-jet-dropdown-link href="{{ route('teams.create') }}">
-                                                {{ __('Create New Team') }}
-                                            </x-jet-dropdown-link>
-                                        @endcan
-
-                                        <div class="border-t border-gray-100"></div>
-
-                                        <!-- Team Switcher -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
-                                            {{ __('Switch Teams') }}
-                                        </div>
-
-                                        @foreach (Auth::user()->allTeams() as $team)
-                                            <x-jet-switchable-team :team="$team"/>
-                                        @endforeach
-                                    </div>
-                                </x-slot>
-                            </x-jet-dropdown>
-                        </div>
-                    @endif
                 </ul>
             </div>
             <div class="nav-right col-8 pull-right right-header p-0">
                 <ul class="nav-menus">
-
                     <li><span class="header-search"><i data-feather="search"></i></span></li>
                     <li>
                         <div class="mode"><i class="fa fa-moon-o"></i></div>
@@ -146,16 +96,45 @@
                     <li class="maximize"><a class="text-dark" href="#!" onclick="toggleFullScreen()"><i
                                 data-feather="maximize"></i></a></li>
                     <li class="profile-nav onhover-dropdown p-0 me-0">
-                        <div class="media profile-media"><img class="b-r-10" src="{{asset('images/dashboard/profile.jpg')}}" alt="">
+                        <div class="media profile-media"><img class="b-r-10"
+                                                              src="{{asset('images/dashboard/profile.jpg')}}" alt="">
                             <div class="media-body"><span>{{auth()->user()->name}}</span>
-                                <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
+                                <p class="mb-0 font-roboto">{{ Auth::user()->currentTeam->name }} <i
+                                        class="middle fa fa-angle-down"></i></p>
                             </div>
                         </div>
                         <ul class="profile-dropdown onhover-show-div">
-{{--                            <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>--}}
-{{--                            <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>--}}
-{{--                            <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>--}}
-{{--                            <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>--}}
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Manage Team') }}
+                            </div>
+
+                            <!-- Team Settings -->
+                            <li><a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"><i
+                                        data-feather="user"></i><span>{{ __('Team Settings') }}</span></a></li>
+
+
+                            @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                                <li>
+                                    <a href="{{ route('teams.create') }}">
+                                        <i data-feather="user"></i><span>{{ __('Create New Team') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            <div class="border-t border-gray-100"></div>
+
+                            <!-- Team Switcher -->
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Switch Teams') }}
+                            </div>
+
+                            @foreach (Auth::user()->allTeams() as $team)
+                                <x-jet-switchable-team :team="$team"/>
+                            @endforeach
+
+                            {{--                            <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>--}}
+                            {{--                            <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>--}}
+                            {{--                            <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>--}}
                             <li>
 
                                 <form method="POST" action="{{ route('logout') }}">
@@ -196,7 +175,7 @@
         <!-- Page Sidebar Start-->
         <div class="sidebar-wrapper">
             <div>
-                <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light"
+                <div class="logo-wrapper"><a href="{{ route('dashboard') }}"><img class="img-fluid for-light"
                                                                     src="{{asset('images/logo/logo.png')}}" alt=""><img
                             class="img-fluid for-dark" src="{{asset('images/logo/logo_dark.png')}}" alt=""></a>
                     <div class="back-btn"><i class="fa fa-angle-left"></i></div>
@@ -204,7 +183,7 @@
                     </div>
                 </div>
                 <div class="logo-icon-wrapper">
-                    <a href="index.html">
+                    <a href="{{ route('dashboard') }}">
                         <img class="img-fluid" src="{{asset('images/logo/logo-icon.png')}}" alt="">
                     </a>
                 </div>
@@ -270,6 +249,9 @@
 <script src="{{asset('js/typeahead/typeahead.custom.js')}}"></script>
 <script src="{{asset('js/typeahead-search/handlebars.js')}}"></script>
 <script src="{{asset('js/typeahead-search/typeahead-custom.js')}}"></script>
+<script src="{{asset('js/jquery.ui.min.js')}}"></script>
+<script src="{{asset('js/editor/summernote/summernote.js')}}"></script>
+<script src="{{asset('js/editor/summernote/summernote.custom.js')}}"></script>
 <script src="{{asset('js/tooltip-init.js')}}"></script>
 
 <script src="{{asset('js/form-validation-custom.js')}}"></script>
