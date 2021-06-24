@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $id
- * @property integer $team_id
+ * @property integer $study_program_id
  * @property string $title
  * @property string $slug
  * @property string $privilege
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $status
  * @property string $created_at
  * @property string $updated_at
- * @property Team $team
+ * @property StudyProgram $studyProgram
  * @property Module[] $modules
  * @property UserOnLearningPath[] $userOnLearningPaths
  */
@@ -22,7 +22,7 @@ class LearningPath extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -30,14 +30,14 @@ class LearningPath extends Model
     /**
      * @var array
      */
-    protected $fillable = ['team_id', 'title', 'slug', 'privilege', 'thumbnail_path', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['study_program_id', 'title','quota', 'slug', 'privilege', 'thumbnail_path', 'status', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function team()
+    public function studyProgram()
     {
-        return $this->belongsTo('App\Models\Team');
+        return $this->belongsTo('App\Models\StudyProgram');
     }
 
     /**

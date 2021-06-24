@@ -13,6 +13,8 @@
     </x-slot>
 
     <div>
+        <a href="{{ route('learning-path.create') }}" class="btn btn-primary">Add</a>
+        <br><br>
         <div class="row">
             <div class="col-xl-12 row">
                 @foreach($learningpaths as $lp)
@@ -20,19 +22,20 @@
                         <div class="card">
                             <div class="blog-box blog-grid text-center product-box">
                                 <div class="product-img">
-                                    <img class="img-fluid top-radius-blog" src="{{asset($lp->thumbnail_path)}}" alt="">
+                                    <img class="img-fluid top-radius-blog" src="{{asset(($lp->thumbnail_path==null)?'images/faq/3.jpg':$lp->thumbnail_path)}}" alt="">
                                     <div class="product-hover">
                                         <ul>
                                             <li><i class="icon-link"></i></li>
                                             <li><i class="icon-import"></i></li>
+                                            <li><i class="icon-pencil"></i></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="blog-details-main">
                                     <ul class="blog-social">
                                         <li>{{$lp->updated_at->format('M d Y')}}</li>
-                                        <li>By :{{$lp->team->name}}</li>
-                                        <li>{{$lp->userOnLearningPaths->count()}} Pelajar</li>
+                                        <li>By :{{$lp->studyProgram->name}}</li>
+                                        <li>{{$lp->userOnLearningPaths->count()."/".$lp->quota}} Pelajar</li>
                                     </ul>
                                     <hr>
                                     <h6 class="blog-bottom-details">

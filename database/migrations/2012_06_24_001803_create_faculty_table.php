@@ -15,6 +15,7 @@ class CreateFacultyTable extends Migration
     {
         Schema::create('faculties', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->unsignedBigInteger('college_id');
             $table->timestamps();

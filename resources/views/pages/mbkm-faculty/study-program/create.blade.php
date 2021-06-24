@@ -18,7 +18,7 @@
                 <h5>Menambahkan fakultas dalam kampus</h5>
             </div>
             <div class="card-body">
-                <livewire:form-faculty action="create" collegeId="{{auth()->user()->college->id}}"/>
+                <livewire:form-study-program action="create"/>
             </div>
         </div>
     </div>

@@ -25,19 +25,21 @@
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>Nama Fakultas</th>
-                                <th>Email Fakultas</th>
-                                <th>Jumlah Program Study</th>
-                                <th>Lihat aktivitas</th>
+                                <th>Nama Program Study</th>
+                                <th>Jumlah Mata kuliah MBKM</th>
+                                <th>Jumlah Mata kuliah Public</th>
+                                <th>Jumlah Kelas aktif</th>
+                                <th>Jumlah siswa MBKM</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($faculties as $faculty)
+                            @foreach($sp as $s)
                                 <tr>
-                                    <td>{{ $faculty->name }}</td>
-                                    <td>{{ $faculty->user->email }}</td>
-                                    <td>{{ $faculty->study_programs_count }}</td>
-                                    <td>{{ $faculty->faculties }}</td>
+                                    <td>{{ $s->name }}</td>
+                                    <td>{{ $s->user }}</td>
+                                    <td>{{ $s->study_programs_count }}</td>
+                                    <td>{{ $s->faculties }}</td>
+                                    <td>{{ $s->faculties }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

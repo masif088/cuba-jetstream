@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\LearningPath;
+use App\Models\StudyProgram;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,6 +15,11 @@ class FormLearningPath extends Component
     public $action;
     public $learningpath;
     public $file;
+    public $ps;
+
+    public function mount(){
+        $this->ps=StudyProgram::whereFacultyId(auth()->user()->faculty->id)->get();
+    }
 
     public function render()
     {
@@ -21,6 +28,7 @@ class FormLearningPath extends Component
 
     public function create()
     {
+        $this->learningpath['slug']=Str::slug($this->learningpath['title']);
 LearningPath::create($this->learningpath);
     }
 }

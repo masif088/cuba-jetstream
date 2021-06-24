@@ -40,6 +40,14 @@ class CreateUsersTable extends Migration
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
         });
+
+        Schema::table('faculties', function (Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->restrictOnDelete()
+                ->cascadeOnUpdate();
+        });
     }
 
     /**
