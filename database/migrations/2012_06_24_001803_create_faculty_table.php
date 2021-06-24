@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudYProgramsTable extends Migration
+class CreateFacultyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateStudYProgramsTable extends Migration
      */
     public function up()
     {
-        Schema::create('study_programs', function (Blueprint $table) {
+        Schema::create('faculties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('colleges_id');
+            $table->unsignedBigInteger('college_id');
             $table->timestamps();
 
-            $table->foreign('colleges_id')
+            $table->foreign('college_id')
                 ->references('id')
                 ->on('colleges')
                 ->cascadeOnUpdate()
@@ -34,6 +34,6 @@ class CreateStudYProgramsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('program_studies');
+        Schema::dropIfExists('faculty');
     }
 }

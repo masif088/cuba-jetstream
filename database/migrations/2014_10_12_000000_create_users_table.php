@@ -22,16 +22,23 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->unsignedBigInteger('college_id')->nullable();
+            $table->unsignedBigInteger('study_program_id')->nullable();
             $table->integer('nim')->nullable();
             $table->integer('role')->default(0);
             $table->timestamps();
 
-            $table->foreign('college_id')
+            $table->foreign('study_program_id')
                 ->references('id')
-                ->on('colleges')
+                ->on('study_programs')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
+        });
+        Schema::table('colleges', function (Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->restrictOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 

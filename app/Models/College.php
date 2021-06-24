@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $id
+ * @property integer $user_id
  * @property string $name
  * @property string $created_at
  * @property string $updated_at
- * @property StudyProgram[] $studyPrograms
+ * @property User $user
+ * @property Faculty[] $faculties
  * @property Team[] $teams
- * @property User[] $users
  */
 class College extends Model
 {
@@ -25,14 +26,22 @@ class College extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'name', 'created_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function studyPrograms()
+    public function faculties()
     {
-        return $this->hasMany('App\Models\StudyProgram', 'colleges_id');
+        return $this->hasMany('App\Models\Faculty');
     }
 
     /**
@@ -41,13 +50,5 @@ class College extends Model
     public function teams()
     {
         return $this->hasMany('App\Models\Team');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function users()
-    {
-        return $this->hasMany('App\Models\User');
     }
 }

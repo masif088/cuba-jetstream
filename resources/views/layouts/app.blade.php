@@ -36,9 +36,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/animate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/chartist.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/date-picker.css')}}">
-{{--    <link rel="stylesheet" type="text/css" href="{{asset('css/summernote.min.css')}}">--}}
-<!-- Plugins css Ends-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/vendors/select2.css') }}">
+    <!-- Plugins css Ends-->
     <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/summernote.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/vendors/datatables.css') }}">
+
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{asset('css/vendors/bootstrap.css')}}">
     <!-- App css-->
@@ -46,10 +49,10 @@
     <link id="color" rel="stylesheet" href="{{asset('css/color-1.css" media="screen')}}">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{asset('css/responsive.css')}}">
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+{{--    <link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
     @livewireStyles
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
+{{--    <script src="{{ mix('js/app.js') }}" defer></script>--}}
 </head>
 <body onload="startTime()">
 <!-- tap on top starts-->
@@ -99,38 +102,39 @@
                         <div class="media profile-media"><img class="b-r-10"
                                                               src="{{asset('images/dashboard/profile.jpg')}}" alt="">
                             <div class="media-body"><span>{{auth()->user()->name}}</span>
-                                <p class="mb-0 font-roboto">{{ Auth::user()->currentTeam->name }} <i
-                                        class="middle fa fa-angle-down"></i></p>
+                                <p class="mb-0 font-roboto">{{ \App\Http\Controllers\Helper::getNameRole(auth()->user()->role) }}
+                                    <i class="middle fa fa-angle-down"></i>
+                                </p>
                             </div>
                         </div>
                         <ul class="profile-dropdown onhover-show-div">
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Team') }}
-                            </div>
+                            {{--                            <div class="block px-4 py-2 text-xs text-gray-400">--}}
+                            {{--                                {{ __('Manage Team') }}--}}
+                            {{--                            </div>--}}
 
-                            <!-- Team Settings -->
-                            <li><a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"><i
-                                        data-feather="user"></i><span>{{ __('Team Settings') }}</span></a></li>
+                            {{--                            <!-- Team Settings -->--}}
+                            {{--                            <li><a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"><i--}}
+                            {{--                                        data-feather="user"></i><span>{{ __('Team Settings') }}</span></a></li>--}}
 
 
-                            @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                <li>
-                                    <a href="{{ route('teams.create') }}">
-                                        <i data-feather="user"></i><span>{{ __('Create New Team') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
+                            {{--                            @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
+                            {{--                                <li>--}}
+                            {{--                                    <a href="{{ route('teams.create') }}">--}}
+                            {{--                                        <i data-feather="user"></i><span>{{ __('Create New Team') }}</span>--}}
+                            {{--                                    </a>--}}
+                            {{--                                </li>--}}
+                            {{--                            @endcan--}}
 
-                            <div class="border-t border-gray-100"></div>
+                            {{--                            <div class="border-t border-gray-100"></div>--}}
 
-                            <!-- Team Switcher -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Switch Teams') }}
-                            </div>
+                            {{--                            <!-- Team Switcher -->--}}
+                            {{--                            <div class="block px-4 py-2 text-xs text-gray-400">--}}
+                            {{--                                {{ __('Switch Teams') }}--}}
+                            {{--                            </div>--}}
 
-                            @foreach (Auth::user()->allTeams() as $team)
-                                <x-jet-switchable-team :team="$team"/>
-                            @endforeach
+                            {{--                            @foreach (Auth::user()->allTeams() as $team)--}}
+                            {{--                                <x-jet-switchable-team :team="$team"/>--}}
+                            {{--                            @endforeach--}}
 
                             {{--                            <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>--}}
                             {{--                            <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>--}}
@@ -176,7 +180,8 @@
         <div class="sidebar-wrapper">
             <div>
                 <div class="logo-wrapper"><a href="{{ route('dashboard') }}"><img class="img-fluid for-light"
-                                                                    src="{{asset('images/logo/logo.png')}}" alt=""><img
+                                                                                  src="{{asset('images/logo/logo.png')}}"
+                                                                                  alt=""><img
                             class="img-fluid for-dark" src="{{asset('images/logo/logo_dark.png')}}" alt=""></a>
                     <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                     <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i>
@@ -252,8 +257,11 @@
 <script src="{{asset('js/jquery.ui.min.js')}}"></script>
 <script src="{{asset('js/editor/summernote/summernote.js')}}"></script>
 <script src="{{asset('js/editor/summernote/summernote.custom.js')}}"></script>
+<script src="{{ asset('js/select2/select2.full.min.js') }}"></script>
+<script src="{{ asset('js/select2/select2-custom.js') }}"></script>
 <script src="{{asset('js/tooltip-init.js')}}"></script>
-
+<script src="{{asset('js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('js/datatable/datatables/datatable.custom.js')}}"></script>
 <script src="{{asset('js/form-validation-custom.js')}}"></script>
 
 <!-- Plugins JS Ends-->

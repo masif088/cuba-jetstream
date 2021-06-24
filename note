@@ -14,6 +14,8 @@ php artisan make:migration create_users_answer_table
 
 
 php artisan krlove:generate:model College
+php artisan krlove:generate:model faculty
+php artisan krlove:generate:model StudyProgram
 php artisan krlove:generate:model LearningPath
 php artisan krlove:generate:model UserOnLearningPath
 php artisan krlove:generate:model Module

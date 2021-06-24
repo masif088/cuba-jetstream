@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Http\Controllers\CollegeController;
+use App\Http\Controllers\LearningPathController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +23,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/learningpath', [LearningPathController::class,'index']);
+Route::get('/learningpath/create', [LearningPathController::class,'create']);
+Route::resource('college', CollegeController::class)->only(['index','create','edit']);
