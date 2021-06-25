@@ -96,7 +96,7 @@
                     <li>
                         <div class="mode"><i class="fa fa-moon-o"></i></div>
                     </li>
-                    <li class="maximize"><a class="text-dark" href="#!" onclick="toggleFullScreen()"><i
+                    <li class="maximize"><a class="text-dark" href="#" onclick="toggleFullScreen()"><i
                                 data-feather="maximize"></i></a></li>
                     <li class="profile-nav onhover-dropdown p-0 me-0">
                         <div class="media profile-media"><img class="b-r-10"
@@ -264,6 +264,10 @@
 <script src="{{asset('js/datatable/datatables/datatable.custom.js')}}"></script>
 <script src="{{asset('js/form-validation-custom.js')}}"></script>
 
+<script src="{{ asset('js/chart/chartjs/chart.min.js') }}"></script>
+<script src="{{ asset('js/chart/chartjs/chart.custom.js') }}"></script>
+<script src="{{asset('js/chart/google/google-chart-loader.js')}}"></script>
+<script src="{{asset('js/chart/google/google-chart.js')}}"></script>
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('js/script.js')}}"></script>
