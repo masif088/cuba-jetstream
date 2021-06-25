@@ -49,10 +49,10 @@
     <link id="color" rel="stylesheet" href="{{asset('css/color-1.css" media="screen')}}">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{asset('css/responsive.css')}}">
-{{--    <link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @livewireStyles
     <!-- Scripts -->
-{{--    <script src="{{ mix('js/app.js') }}" defer></script>--}}
+    <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 <body onload="startTime()">
 <!-- tap on top starts-->
@@ -136,9 +136,9 @@
                             {{--                                <x-jet-switchable-team :team="$team"/>--}}
                             {{--                            @endforeach--}}
 
-                            {{--                            <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>--}}
-                            {{--                            <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>--}}
-                            {{--                            <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>--}}
+                                                        <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
+                                                        <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
+                                                        <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
                             <li>
 
                                 <form method="POST" action="{{ route('logout') }}">
@@ -148,7 +148,6 @@
                             </li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
 
@@ -173,7 +172,7 @@
                 </div></script>
         </div>
     </div>
-    <!-- Page Header Ends                              -->
+    <!-- Page Header Ends-->
     <!-- Page Body Start-->
     <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
